@@ -118,11 +118,13 @@ class AvailableMap {
   String mapName;
   MapType mapType;
   String icon;
+  bool hasBackgroundFill;
 
   AvailableMap({
     required this.mapName,
     required this.mapType,
     required this.icon,
+    this.hasBackgroundFill = true,
   });
 
   /// Parses json object to [AvailableMap]
@@ -130,10 +132,15 @@ class AvailableMap {
     final MapType? mapType =
         Utils.enumFromString(MapType.values, json['mapType']);
     if (mapType != null) {
+      final hasBackgroundFill = json['hasBackgroundFill'];
+      var iconPath = 'packages/map_launcher/assets/icons/${json['mapType']}';
+      iconPath += hasBackgroundFill ? '_nofill.svg' : 'svg';
+      
       return AvailableMap(
         mapName: json['mapName'],
         mapType: mapType,
-        icon: 'packages/map_launcher/assets/icons/${json['mapType']}.svg',
+        icon: iconPath,
+        hasBackgroundFill: hasBackgroundFill,
       );
     } else {
       return null;
