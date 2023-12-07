@@ -134,7 +134,7 @@ class AvailableMap {
     if (mapType != null) {
       final showFill = json['showFill'];
       var iconPath = 'packages/map_launcher/assets/icons/${json['mapType']}';
-      iconPath += showFill ? '_nofill.svg' : 'svg';
+      iconPath += showFill ? '.svg' : '_nofill.svg';
       
       return AvailableMap(
         mapName: json['mapName'],
