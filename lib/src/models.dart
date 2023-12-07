@@ -124,7 +124,7 @@ class AvailableMap {
     required this.mapName,
     required this.mapType,
     required this.icon,
-    this.showFill,
+    this.showFill = true,
   });
 
   /// Parses json object to [AvailableMap]
