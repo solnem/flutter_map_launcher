@@ -118,13 +118,13 @@ class AvailableMap {
   String mapName;
   MapType mapType;
   String icon;
-  bool hasBackgroundFill;
+  bool showFill;
 
   AvailableMap({
     required this.mapName,
     required this.mapType,
     required this.icon,
-    this.hasBackgroundFill = true,
+    this.showFill,
   });
 
   /// Parses json object to [AvailableMap]
@@ -132,21 +132,21 @@ class AvailableMap {
     final MapType? mapType =
         Utils.enumFromString(MapType.values, json['mapType']);
     if (mapType != null) {
-      final hasBackgroundFill = json['hasBackgroundFill'];
+      final showFill = json['showFill'];
       var iconPath = 'packages/map_launcher/assets/icons/${json['mapType']}';
-      iconPath += hasBackgroundFill ? '_nofill.svg' : 'svg';
+      iconPath += showFill ? '_nofill.svg' : 'svg';
       
       return AvailableMap(
         mapName: json['mapName'],
         mapType: mapType,
         icon: iconPath,
-        hasBackgroundFill: hasBackgroundFill,
+        showFill: showFill,
       );
     } else {
       return null;
     }
   }
-
+  
   /// Launches current map and shows marker at `coords`
   Future<void> showMarker({
     required Coords coords,
