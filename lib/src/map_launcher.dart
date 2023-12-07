@@ -6,12 +6,13 @@ import 'package:map_launcher/src/marker_url.dart';
 import 'package:map_launcher/src/models.dart';
 import 'package:map_launcher/src/utils.dart';
 
-class MapLauncher {
+class MapLauncher {  
   static const MethodChannel _channel = const MethodChannel('map_launcher');
 
   /// Returns list of installed map apps on the device.
-  static Future<List<AvailableMap>> get installedMaps async {
+  static Future<List<AvailableMap>> installedMaps({bool showFill = true}) async {
     final maps = await _channel.invokeMethod('getInstalledMaps');
+    maps.forEach((map) => map['showFill'] = showFill);
     return List<AvailableMap>.from(
       maps.map((map) => AvailableMap.fromJson(map)),
     );
